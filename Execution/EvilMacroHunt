@@ -1,0 +1,23 @@
+//Code example to find powershell executions from macros
+//
+// Please update InitiatingProcessFileName and ProcessCommandLine to suite your needs
+//
+// you can also add the 
+//
+//  |where ProcessCommandLine has "Net.WebClient"
+//
+//   or ProcessCommandLine has "DownloadFile"
+//   or ProcessCommandLine has "Invoke-WebRequest"
+//   or ProcessCommandLine has "Invoke-Shellcode"
+//   or ProcessCommandLine contains "http:"
+//
+// to do a more fine grained search
+// happy hunting!
+//
+// Mattias Borg
+
+ProcessCreationEvents 
+| where EventTime > ago(14d) 
+| where (ProcessCommandLine has "powershell" or ProcessCommandLine has "cmd")
+| where InitiatingProcessFileName in~ ("winword.exe", "excel.exe", "powerpoint.exe") 
+| project ComputerName,ActionType, ProcessCommandLine 
