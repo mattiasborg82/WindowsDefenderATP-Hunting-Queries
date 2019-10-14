@@ -1,0 +1,15 @@
+// Mattias Borg
+// Sec-Labs R&D
+let Computer = "computername";	
+let TimeBefore = datetime("2019-10-01 22:46:42");
+let TimeAfter = datetime("2019-09-01 00:57:27");
+let FileExtension = "";
+FileCreationEvents
+| where (ComputerName == Computer)
+| where EventTime between(TimeAfter .. TimeBefore)
+| where FileName endswith FileExtension 
+| sort by EventTime desc
+| project EventTime, ComputerName, FileName, 
+          InitiatingProcessFolderPath, InitiatingProcessCommandLine, 
+          FolderPath, SHA1, InitiatingProcessAccountName, 
+          InitiatingProcessIntegrityLevel, InitiatingProcessParentFileName 
