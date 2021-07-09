@@ -1,4 +1,4 @@
-// List commands the exposed WIFI Keys
+// List commands used to expose WIFI Keys
 // @mattiasborg82
 // blog.sec-labs.com
 DeviceProcessEvents 
